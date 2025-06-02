@@ -1,4 +1,3 @@
-import { useNavigation } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
 import { Slider } from "./slider";
 import { Input } from "./ui/input";
@@ -9,7 +8,6 @@ export function LevelPainting() {
 	const [imageSource, setImageSource] = useState("");
 	const [expAmount, setExpAmount] = useState([50]);
 	const [level, setLevel] = useState(50);
-	const navigation = useNavigation();
 
 	useEffect(() => {
 		if (!canvasRef.current) {
@@ -34,7 +32,6 @@ export function LevelPainting() {
 
 		const foreground = new Image();
 		foreground.onload = () => {
-			// Mask the foreground image along the x axis based on experienceAmount
 			const width = (canvasRef.current?.width ?? 0) * (expAmount[0] / 100);
 			const canvasWidth = canvasRef.current?.width ?? 0;
 			const canvasHeight = canvasRef.current?.height ?? 0;
@@ -66,7 +63,7 @@ export function LevelPainting() {
 			setImageSource(canvasRef.current?.toDataURL() ?? "");
 		};
 		foreground.src = `experience_bar_progress.png`;
-	}, [expAmount, navigation.state, level]);
+	}, [expAmount, level]);
 
 	return (
 		<>
@@ -95,7 +92,12 @@ export function LevelPainting() {
 					}}
 				></Input>
 			</Label>
-			<Slider max={100} step={1} value={expAmount} onValueChange={setExpAmount} />
+			<Slider
+				max={100}
+				step={1}
+				value={expAmount}
+				onValueChange={setExpAmount}
+			/>
 		</>
 	);
 }

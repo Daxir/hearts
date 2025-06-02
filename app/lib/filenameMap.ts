@@ -28,4 +28,9 @@ export const filenameMap: Record<
 		halfImageFilename: "half-food",
 		emptyImageFilename: "empty-food",
 	},
+	thirst: {
+		fullImageFilename: "full-thirst",
+		halfImageFilename: "half-thirst",
+		emptyImageFilename: "empty-thirst",
+	},
 };
