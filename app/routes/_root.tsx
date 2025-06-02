@@ -14,10 +14,9 @@ export const meta: MetaFunction = () => {
 export default function RootLayout() {
 	const { pathname, search } = useLocation();
 
-	const currentSegment =
-		pathname === "/custom"
-			? "custom"
-			: search.replace("?style=", "") ?? "default";
+	const currentSegment = search.startsWith("?style=")
+		? search.replace("?style=", "") ?? "default"
+		: pathname.slice(1) ?? "default";
 
 	return (
 		<main className="h-screen w-screen bg-slate-950 text-slate-50">
@@ -64,6 +63,14 @@ export default function RootLayout() {
 							disabled={pathname === "/custom"}
 						>
 							custom
+						</MenuItem>
+						<MenuItem
+							as={Link}
+							to={`/level`}
+							className="block rounded p-2 capitalize data-[focus]:bg-slate-900 data-[disabled]:!text-slate-500"
+							disabled={pathname === "/level"}
+						>
+							level
 						</MenuItem>
 					</MenuItems>
 				</Menu>
