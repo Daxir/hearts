@@ -4,5 +4,6 @@ export const STYLES = [
 	"freezing",
 	"food",
 	"thirst",
+	"air",
 ] as const;
 export type Style = (typeof STYLES)[number];
